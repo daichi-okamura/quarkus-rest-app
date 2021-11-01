@@ -2,6 +2,7 @@ package jp.ampnmn.rest.json;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Set;
@@ -21,19 +22,19 @@ public class FruitResource {
     }
 
     @GET
-    public Set<Fruit> list() {
-        return fruits;
+    public Response list() {
+        return Response.ok(fruits).build();
     }
 
     @POST
-    public Set<Fruit> add(Fruit fruit) {
+    public Response add(Fruit fruit) {
         fruits.add(fruit);
-        return fruits;
+        return Response.ok(fruits).build();
     }
 
     @DELETE
-    public Set<Fruit> delete(Fruit fruit) {
+    public Response delete(Fruit fruit) {
         fruits.removeIf(existingFruit -> existingFruit.name.contentEquals(fruit.name));
-        return fruits;
+        return Response.ok(fruits).build();
     }
 }
